@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "node index.js"
+  },
+  "name": "voilasnap-api",
+  "version": "0.0.1",
+  "description": "A more private snap",
+  "main": "index.js",
+  "repository": "git@github.com:digiz3d/voilasnap-api.git",
+  "author": "Léandre Daumont <digiz3d@users.noreply.github.com>",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
