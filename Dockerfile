@@ -4,7 +4,7 @@
 ## Deps
 FROM node:latest AS build
 COPY . /tmp
-RUN cd /tmp && yarn install && yarn build
+RUN cd /tmp && yarn install && yarn build && rm -rf src
 
 ## Bin
 FROM build
