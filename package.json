@@ -1,16 +1,28 @@
 {
   "scripts": {
-    "start": "node index.js"
+    "start": "node build/index.js",
+    "build": "babel src -d build",
+    "dev": "nodemon --exec babel-node src/index.js"
   },
   "name": "voilasnap-api",
   "version": "0.0.1",
   "description": "A more private snap",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "git@github.com:digiz3d/voilasnap-api.git",
   "author": "Léandre Daumont <digiz3d@users.noreply.github.com>",
   "private": true,
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "eslint": "^6.6.0",
+    "nodemon": "^1.19.4"
   }
 }

@@ -5,6 +5,8 @@
 FROM node:latest AS build
 COPY . /tmp
 RUN cd /tmp && yarn install
+RUN cd /tmp && yarn build
+RUN cd /tmp && rm -rf src
 
 ## Bin
 FROM build
