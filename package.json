@@ -8,7 +8,7 @@
   "version": "0.0.1",
   "description": "A more private snap",
   "main": "src/index.js",
-  "repository": "git@github.com:digiz3d/voilasnap-api.git",
+  "repository": "github:digiz3d/voilasnap-api",
   "author": "Léandre Daumont <digiz3d@users.noreply.github.com>",
   "private": true,
   "dependencies": {

@@ -2,7 +2,7 @@
 # The last one is the one that we will use
 
 ## Deps
-FROM node:latest AS build
+FROM node:current-alpine AS build
 COPY . /tmp
 RUN cd /tmp && yarn install && yarn build && rm -rf src
 

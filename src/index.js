@@ -1,5 +1,3 @@
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -18,6 +16,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.json({ welcome: true })
+})
 app.use('/auth', auth)
 app.use((req, res) => {
   res.status(404).json({ error: true })
@@ -28,9 +29,9 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(
-  process.env.PORT || 3000,
+  process.env.PORT,
   process.env.HOSTNAME || '127.0.0.1',
   () => {
-    console.log(`listening ${process.env.PORT || 3000}`)
+    console.log(`listening ${process.env.PORT}`)
   },
 )
