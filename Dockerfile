@@ -7,7 +7,7 @@ COPY . /tmp
 RUN cd /tmp && yarn install && yarn build && rm -rf src
 
 ## Bin
-FROM build
+FROM node:current-alpine
 RUN mkdir -p /usr/bin
 COPY --from=build /tmp /usr/bin
 WORKDIR /usr/bin
