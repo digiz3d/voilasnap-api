@@ -7,11 +7,16 @@ import mongoose from 'mongoose'
 
 import auth from './routes/auth'
 import AuthMiddleware from './middleware/auth'
+import message from './routes/message'
+import user from './routes/user'
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('connected to mongo db'))
+  .catch(() => console.log('error connecting to mongo db'))
 
 const app = express()
 
@@ -24,12 +29,13 @@ app.get('/', (req, res) => {
 
 app.use('/auth', auth)
 app.use(AuthMiddleware)
-app.use('/coucou', (req, res) => res.json({ coucou: true }))
+app.use('/user', user)
+app.use('/message', message)
 
 app.use((req, res) => {
   res.status(404).json({ error: true })
 })
 
-app.listen(process.env.PORT, process.env.HOSTNAME || '127.0.0.1', () => {
+app.listen(process.env.PORT, () => {
   console.log(`listening ${process.env.PORT}`)
 })
