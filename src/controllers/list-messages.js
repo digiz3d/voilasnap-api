@@ -2,7 +2,10 @@ import Message from '../models/Message'
 
 export default async (req, res) => {
   try {
-    const messages = await Message.find({ receiverId: res.locals.userId }, { _id: 1, senderId: 1, kind: 1 })
+    const messages = await Message.find(
+      { receiverId: res.locals.userId, openedAt: null },
+      { _id: 1, senderId: 1, kind: 1 },
+    )
       .populate('senderId', { username: 1 })
       .exec()
 
