@@ -1,7 +1,4 @@
-import { Base64 } from 'js-base64'
 import Message from '../models/Message'
-
-const { atob } = Base64
 
 export default async (req, res) => {
   console.log(req.query)
@@ -14,12 +11,12 @@ export default async (req, res) => {
 
     if (req.query.pure) {
       if (message.kind === 'Snap') {
-        res.set('Content-Type', 'image/png')
-        return res.send(atob(message.content))
+        return res.end(Buffer.from(message.content, 'base64'))
       } else return res.send(message.content)
     }
     return res.send({ success: true, payload: message })
   } catch (err) {
+    console.log(err)
     return res.status(400).send({ error: true })
   }
 }
