@@ -7,8 +7,8 @@ import mongoose from 'mongoose'
 
 import auth from './routes/auth'
 import AuthMiddleware from './middleware/auth'
-import message from './routes/message'
-import user from './routes/user'
+import messages from './routes/messages'
+import users from './routes/users'
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 
 app.use('/auth', auth)
 app.use(AuthMiddleware)
-app.use('/user', user)
-app.use('/message', message)
+app.use('/users', users)
+app.use('/messages', messages)
 
 app.use((req, res) => {
   res.status(404).json({ error: true })
