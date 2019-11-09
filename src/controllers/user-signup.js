@@ -1,4 +1,4 @@
-import { hash, genSalt } from 'bcrypt'
+import { hash, genSalt } from 'bcryptjs'
 
 import User from '../models/User'
 
