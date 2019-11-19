@@ -1,0 +1,16 @@
+### development only
+version: '3.7'
+services:
+  mongo:
+    image: 'mongo:latest'
+    container_name: 'mongo'
+    volumes:
+      - ./.mongo-volume:/data/db
+    ports:
+      - '27017:27017'
+  voilasnap-api:
+    container_name: voilasnap-api
+    build:
+      context: .
+      dockerfile: 'Dockerfile'
+    command: ['yarn', 'start']
