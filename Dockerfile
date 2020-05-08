@@ -9,6 +9,6 @@ RUN cd /tmp && yarn install && yarn build && rm -rf src
 ## Bin
 FROM node:current-alpine AS final
 RUN mkdir -p /usr/bin
-COPY --from=build /tmp /usr/bin
+COPY --from=dependencies /tmp /usr/bin
 WORKDIR /usr/bin
 CMD ["yarn","start"]
