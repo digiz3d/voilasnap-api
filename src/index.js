@@ -14,9 +14,10 @@ mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 3000
   })
   .then(() => console.log('connected to mongo db'))
-  .catch(() => console.log('error connecting to mongo db'))
+  .catch((e) => console.log('error connecting to mongo db',e))
 
 const app = express()
 

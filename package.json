@@ -18,7 +18,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.7",
-    "uuid": "^3.3.3"
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -27,6 +27,6 @@
     "@babel/preset-env": "^7.6.3",
     "babel-preset-minify": "^0.5.1",
     "eslint": "^6.6.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.3"
   }
 }
