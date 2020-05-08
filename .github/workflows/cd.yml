@@ -16,24 +16,24 @@ jobs:
         uses: actions/checkout@v2
       - name: Pull latest docker images from registry
         run: |-
-          docker pull "$REGISTRY/voilasnap-api-deps:latest" || true
-          docker pull "$REGISTRY/voilasnap-api-final:latest" || true
+          docker pull "${{ env.REGISTRY }}/voilasnap-api-deps:latest" || true
+          docker pull "${{ env.REGISTRY }}/voilasnap-api-final:latest" || true
       - name: Build docker images
         run: |-
           docker build \
             --target dependencies \
-            --cache-from "$REGISTRY/voilasnap-api-deps:latest" \
-            --tag "$REGISTRY/voilasnap-api-deps:latest" \
+            --cache-from "${{ env.REGISTRY }}/voilasnap-api-deps:latest" \
+            --tag "${{ env.REGISTRY }}/voilasnap-api-deps:latest" \
             .
           docker build \
-            --cache-from "$REGISTRY/voilasnap-api-deps:latest" \
-            --cache-from "$REGISTRY/voilasnap-api-final:latest" \
-            --tag "$REGISTRY/voilasnap-api-final:latest" \
+            --cache-from "${{ env.REGISTRY }}/voilasnap-api-deps:latest" \
+            --cache-from "${{ env.REGISTRY }}/voilasnap-api-final:latest" \
+            --tag "${{ env.REGISTRY }}/voilasnap-api-final:latest" \
             .
       - name: Push images to registry
         run: |-
-          docker push "$REGISTRY/voilasnap-api-deps:latest"
-          docker push "$REGISTRY/voilasnap-api-final:latest"
+          docker push "${{ env.REGISTRY }}/voilasnap-api-deps:latest"
+          docker push "${{ env.REGISTRY }}/voilasnap-api-final:latest"
   deploy:
     name: Deploy to server
     needs: build-docker-image
