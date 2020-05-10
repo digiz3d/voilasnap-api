@@ -8,51 +8,9 @@ services:
       - ./.mongo-volume:/data/db
     ports:
       - '27017:27017'
-
   voilasnap-api:
     container_name: voilasnap-api
     build:
       context: .
       dockerfile: 'Dockerfile'
     command: ['yarn', 'start']
-
-  traefik:
-    image: "traefik:latest"
-    container_name: "traefik"
-    command:
-      #- "--log.level=DEBUG"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--providers.docker"
-      - "--api"
-      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.myhttpchallenge.acme.email=phozon@protonmail.com"
-      - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
-      - --certificatesresolvers.myhttpchallenge.acme.httpchallenge=true
-      #- "--certificatesresolvers.myhttpchallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--metrics.prometheus=true"
-      - "--accesslog=true"
-      - "--accesslog.filepath=./traefik/logs/access.log"
-      - "--accesslog.bufferingsize=100"
-    networks:
-      - proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik/letsencrypt:/letsencrypt"
-      - "./traefik/config.yml:/config.yml"
-    labels:
-      - "traefik.backend=voilasnap-api"
-      - "traefik.frontend.rule=Host:api.cybr.ovh"
-      - "traefik.frontend.entryPoints=https"
-      - "traefik.port=51149"
-
-      # global redirect to https
-      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
-      - "traefik.http.routers.http-catchall.entrypoints=web"
-      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
-
-      # middleware redirect
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
