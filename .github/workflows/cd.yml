@@ -51,10 +51,17 @@ jobs:
             docker pull "${{ env.REGISTRY }}/voilasnap-api-final:latest" || true
             docker stop voilasnap-api || true
             docker rm voilasnap-api || true
-            docker run --name=voilasnap-api --restart=always \
+            docker run --restart=always \
+              -d "${{ env.REGISTRY }}/voilasnap-api-final:latest" \
+              --network=traefik \
+              --name=voilasnap-api \
               -e JWT_SECRET="${{ secrets.API_JWT_SECRET }}" \
               -e MONGODB_CONNECTION_STRING="${{ secrets.API_MONGO_URI }}" \
               -e NODE_ENV="production" \
               -e PORT=51149 \
-              -p 51149:51149 \
-              -d "${{ env.REGISTRY }}/voilasnap-api-final:latest"
+              -l "traefik.enable=true" \
+              -l "traefik.frontend.rule=Host:voilasnap.cf" \
+              -l "traefik.backend=voilasnap-api" \
+              -l "traefik.port:51149" \
+              -l "traefik.frontend.entryPoints=http" \
+              -p 51149:51149
