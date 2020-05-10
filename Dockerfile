@@ -12,3 +12,4 @@ RUN mkdir -p /usr/bin
 COPY --from=dependencies /tmp /usr/bin
 WORKDIR /usr/bin
 CMD ["yarn","start"]
+EXPOSE 80
