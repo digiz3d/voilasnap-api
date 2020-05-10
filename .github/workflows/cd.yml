@@ -63,5 +63,4 @@ jobs:
               -l "traefik.http.routers.voilasnap-api.entrypoints=websecure" \
               -l "traefik.http.routers.voilasnap-api.tls.certresolver=myhttpchallenge" \
               -l "traefik.http.routers.voilasnap-api.tls.certresolver=myhttpchallenge" \
-              -l "traefik.docker.network=traefik" \
               -d "${{ env.REGISTRY }}/voilasnap-api-final:latest"
