@@ -25,6 +25,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(async (req, res, next) => {
+    console.log(req.method, req.url, '\n\t', req.body)
+    next()
+  })
+}
+
 app.get('/', (req, res) => {
   res.json({ welcome: true })
 })
