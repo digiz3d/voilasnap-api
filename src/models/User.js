@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
-  createAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
   friends: {
     list: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
     received: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],

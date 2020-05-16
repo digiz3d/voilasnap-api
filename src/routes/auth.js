@@ -13,9 +13,8 @@ router.post('/signup', userSignup)
 router.post('/signin', userSignin)
 
 router.get('/me', AuthMiddleware, async (req, res) => {
-  const user = await User.findOne({ _id: res.locals.userId }, { password: 0 }).exec()
+  const user = await User.findOne({ _id: res.locals.userId }, { _id: 1, username: 1, createdAt: 1 }).exec()
   if (!user) return res.status(401).send({ error: true, details: 'not found' })
-
   res.json(user)
 })
 

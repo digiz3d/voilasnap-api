@@ -19,7 +19,7 @@ export default async (req, res, next) => {
   try {
     let decodedJwt = verify(token, process.env.JWT_SECRET)
     res.locals.userId = decodedJwt.userId
-    res.locals.user = (await User.findOne({ _id: res.locals.userId })).toObject()
+    res.locals.user = await User.findOne({ _id: res.locals.userId })
   } catch (e) {
     let message = ''
     switch (e.name) {

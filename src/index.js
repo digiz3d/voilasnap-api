@@ -1,12 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import express from 'express'
 import cors from 'cors'
+import express from 'express'
 import mongoose from 'mongoose'
 
 import auth from './routes/auth'
 import AuthMiddleware from './middleware/auth'
+import friends from './routes/friends'
 import messages from './routes/messages'
 import users from './routes/users'
 
@@ -14,10 +15,10 @@ mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 3000
+    serverSelectionTimeoutMS: 3000,
   })
   .then(() => console.log('connected to mongo db'))
-  .catch((e) => console.log('error connecting to mongo db',e))
+  .catch((e) => console.log('error connecting to mongo db', e))
 
 const app = express()
 
@@ -30,8 +31,9 @@ app.get('/', (req, res) => {
 
 app.use('/auth', auth)
 app.use(AuthMiddleware)
-app.use('/users', users)
+app.use('/friends', friends)
 app.use('/messages', messages)
+app.use('/users', users)
 
 app.use((req, res) => {
   res.status(404).json({ error: true })
