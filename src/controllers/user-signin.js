@@ -12,7 +12,7 @@ export default async (req, res) => {
     return res.status(400).send({ error: true, details: err.message })
   }
 
-  const user = await User.findOne({ username }).exec()
+  const user = await User.findOne({ username }).select('+password').exec()
 
   if (!user) return res.status(404).send({ error: true, details: 'user not found' })
 
