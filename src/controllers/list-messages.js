@@ -11,7 +11,7 @@ export default async (req, res) => {
 
     if (!messages) return res.status(404).send({ error: true, details: 'No message found' })
 
-    return res.send({ success: true, payload: messages })
+    return res.send({ success: true, messages })
   } catch (err) {
     return res.status(400).send({ error: true })
   }

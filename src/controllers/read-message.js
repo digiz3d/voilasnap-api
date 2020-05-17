@@ -22,7 +22,7 @@ export default async (req, res) => {
         return res.end(Buffer.from(message.content, 'base64'))
       } else return res.send(message.content)
     }
-    return res.send({ success: true, payload: message })
+    return res.send({ success: true, message })
   } catch (err) {
     console.log(err)
     return res.status(400).send({ error: true })
