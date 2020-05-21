@@ -19,7 +19,13 @@ export default async (req, res) => {
 
     if (req.query.pure) {
       if (message.kind === 'Snap') {
-        return res.end(Buffer.from(message.content, 'base64'))
+        var img = Buffer.from(message.content, 'base64')
+
+        res.writeHead(200, {
+          'Content-Type': 'image/jpeg',
+          'Content-Length': img.length,
+        })
+        return res.end(img)
       } else return res.send(message.content)
     }
     return res.send({ success: true, message })
