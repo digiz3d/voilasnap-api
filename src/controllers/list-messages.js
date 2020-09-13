@@ -2,11 +2,9 @@ import Message from '../models/Message'
 
 export default async (req, res) => {
   try {
-    const messages = await Message.find(
-      { receiverId: res.locals.userId, openedAt: null },
-      { _id: 1, senderId: 1, kind: 1 },
-    )
-      .populate('senderId', { username: 1 })
+    const messages = await Message.find({ receiver: res.locals.userId }, { _id: 1, receiver: 1, sender: 1, kind: 1 })
+      .populate('sender', { username: 1 })
+      .populate('receiver', { username: 1 })
       .exec()
 
     if (!messages) return res.status(404).send({ error: true, details: 'No message found' })

@@ -6,7 +6,7 @@ const messageSchema = new Schema({
   openedAt: { type: Date },
   receivedAt: { type: Date },
   receiverId: { type: Schema.Types.ObjectId, ref: 'User' },
-  senderId: { type: Schema.Types.ObjectId, ref: 'User' },
+  sender: { type: Schema.Types.ObjectId, ref: 'User' },
   sentAt: { type: Date, default: Date.now },
 })
 

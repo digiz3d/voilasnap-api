@@ -5,7 +5,7 @@ export default async (req, res) => {
 
   try {
     const message = await Message.findOne({ _id: req.params.messageId, openedAt: null })
-      .or([{ senderId: res.locals.userId }, { receiverId: res.locals.userId }])
+      .or([{ sender: res.locals.userId }, { receiverId: res.locals.userId }])
       .exec()
     if (!message) return res.status(404).send({ error: true, details: 'message not found' })
 

@@ -11,7 +11,7 @@ export default async (req, res) => {
   const content = isSnap ? req.body.image : req.body.text
 
   try {
-    await Message.create({ senderId: res.locals.userId, receiverId: user._id, kind: isSnap ? 'Snap' : 'Text', content })
+    await Message.create({ sender: res.locals.userId, receiverId: user._id, kind: isSnap ? 'Snap' : 'Text', content })
     return res.send({ success: true })
   } catch (err) {
     return res.status(400).send({ error: true })
