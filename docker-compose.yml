@@ -1,15 +1,18 @@
 ### development only
-version: '3.7'
+version: '3.8'
 services:
   mongo:
     image: 'mongo:latest'
-    container_name: 'mongo'
+    container_name: mongo
     volumes:
       - ./.mongo-volume:/data/db
     ports:
       - '27017:27017'
-  voilasnap-api:
-    container_name: voilasnap-api
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+  api:
+    container_name: api
     build:
       context: .
       dockerfile: 'Dockerfile'

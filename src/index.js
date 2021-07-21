@@ -11,6 +11,8 @@ import friends from './routes/friends'
 import messages from './routes/messages'
 import users from './routes/users'
 
+import { version } from '../package.json'
+
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING, {
     useNewUrlParser: true,
@@ -33,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/', (req, res) => {
-  res.json({ welcome: true })
+  res.json({ welcome: true, version })
 })
 
 app.use('/auth', auth)
