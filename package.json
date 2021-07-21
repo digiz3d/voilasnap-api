@@ -5,7 +5,7 @@
     "dev": "nodemon --exec babel-node src/index.js"
   },
   "name": "voilasnap-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A more private snap",
   "main": "src/index.js",
   "repository": "github:digiz3d/voilasnap-api",

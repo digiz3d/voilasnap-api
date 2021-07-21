@@ -6,7 +6,6 @@ on:
 jobs:
   deploy:
     name: Deploy to server
-    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -22,4 +21,4 @@ jobs:
             git pull origin master
             yarn install --frozen-lockfile
             yarn build
-            pm2 restart voilasnap-api
+            /home/user/.nvm/versions/node/v16.5.0/bin/pm2 restart voilasnap-api
