@@ -1,0 +1,5 @@
+.git
+.github
+.mongo-volume
+.vscode
+node_modules

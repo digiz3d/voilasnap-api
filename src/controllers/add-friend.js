@@ -1,7 +1,7 @@
 import User from '../models/User'
 
 export default async (req, res) => {
-  const user = await User.findOne({ _id: req.params.userId }).exec()
+  const user = await User.findOne({ _id: req.params.userId || req.query.userId || req.body.userId }).exec()
 
   if (!user) return res.status(404).send({ error: true, details: 'user not found' })
 

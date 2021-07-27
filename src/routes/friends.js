@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.get('/:userId', getFriend)
 router.get('/', getFriends)
-router.post('/:userId', addFriend)
+router.put('/:userId', addFriend)
 router.delete('/:userId', unfriend)
 
 export default router

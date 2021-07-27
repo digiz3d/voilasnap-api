@@ -1,5 +1,5 @@
 ### development only
-version: '3.8'
+version: '3.9'
 services:
   mongo:
     image: 'mongo:latest'
@@ -17,3 +17,10 @@ services:
       context: .
       dockerfile: 'Dockerfile'
     command: ['yarn', 'start']
+    ports:
+      - '3000:3000'
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - '6379:6379'
