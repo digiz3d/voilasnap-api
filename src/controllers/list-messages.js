@@ -1,6 +1,6 @@
 import Message from '../models/Message'
 
-export default async (req, res) => {
+export default async function getMessages(req, res) {
   try {
     const messages = await Message.find(
       { receiver: res.locals.userId },

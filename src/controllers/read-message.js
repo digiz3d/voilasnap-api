@@ -1,7 +1,7 @@
 import Message from '../models/Message'
 import redisClient from '../utils/redis'
 
-export default async (req, res) => {
+export default async function readMessage(req, res) {
   try {
     const message = await Message.findOne({ _id: req.params.messageId, openedAt: null })
       .or([{ sender: res.locals.userId }, { receiver: res.locals.userId }])

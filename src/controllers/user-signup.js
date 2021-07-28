@@ -4,7 +4,7 @@ import User from '../models/User'
 
 const saltRounds = 10
 
-export default async (req, res) => {
+export default async function signUp(req, res) {
   const { username, password } = req.body
 
   try {

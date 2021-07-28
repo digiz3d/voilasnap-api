@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken'
 import User from '../models/User'
 
-export default async (req, res, next) => {
+export default async function authMiddleware(req, res, next) {
   const bearerToken =
     req.get('Authorization') &&
     req.get('Authorization').split(' ')[0] === 'Bearer' &&
@@ -12,7 +12,7 @@ export default async (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       error: true,
-      message: 'No token provided.',
+      message: 'no token provided',
     })
   }
 
@@ -24,15 +24,15 @@ export default async (req, res, next) => {
     let message = ''
     switch (e.name) {
       case 'TokenExpiredError':
-        message = 'The token is not valid anymore.'
+        message = 'token expired'
         break
 
       case 'JsonWebTokenError':
-        message = 'The token is invalid / malformed.'
+        message = 'invalid token'
         break
 
       default:
-        message = 'Unknown token error.'
+        message = 'unknown token error.'
         break
     }
 

@@ -1,6 +1,6 @@
 import User from '../models/User'
 
-export default async (req, res) => {
+export default async function unfriend(req, res) {
   const user = await User.findOne({ _id: req.params.userId }).exec()
 
   if (!user) return res.status(404).send({ error: true, details: 'user not found' })

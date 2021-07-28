@@ -3,8 +3,12 @@ import User from '../models/User'
 
 import redisClient from '../utils/redis'
 
-export default async (req, res) => {
-  const user = await User.findOne({ _id: req.params.userId }, { _id: 1 }).exec()
+export default async function sendMessage(req, res) {
+  const userId = req.params.userId || req.query.userId || req.body.userId
+
+  if (!userId) return res.status(400).send({ error: true, details: 'user not found' })
+
+  const user = await User.findOne({ _id: userId }, { _id: 1 }).exec()
 
   if (!user) return res.status(404).send({ error: true, details: 'user not found' })
 

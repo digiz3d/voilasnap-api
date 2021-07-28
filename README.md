@@ -12,6 +12,7 @@
 
 `POST /messages` send a message to 1 or more
 `GET /messages` get messages
+`DELETE /messages/:id` mark message as read and possibly stored on client
 `GET /messages/:id` read one-time message
 
 ### for later maybe if we want multiple people conversations

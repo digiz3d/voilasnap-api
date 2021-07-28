@@ -1,7 +1,14 @@
 import User from '../models/User'
 
-export default async (req, res) => {
-  const user = await User.findOne({ _id: req.params.userId || req.query.userId || req.body.userId }).exec()
+export default async function addFriend(req, res) {
+  const userId = req.params.userId || req.query.userId || req.body.userId
+
+  if (!userId) return res.status(400).send({ error: true, details: 'user not found' })
+
+  if (userId === res.locals.user._id.toString())
+    return res.status(400).send({ error: true, details: 'can\t add yourself' })
+
+  const user = await User.findOne({ _id: userId }).exec()
 
   if (!user) return res.status(404).send({ error: true, details: 'user not found' })
 

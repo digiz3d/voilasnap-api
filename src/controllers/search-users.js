@@ -3,7 +3,7 @@ import User from '../models/User'
 const fields = ['_id', 'username', 'createdAt']
 const fieldsString = fields.join(' ')
 
-export default async (req, res) => {
+export default async function searchUsers(req, res) {
   try {
     const usernameString = typeof req.body.username === 'string' ? req.body.username : JSON.stringify(req.body.username)
     const username = usernameString.replace(/[^a-zA-Z0-9]/g, '.')

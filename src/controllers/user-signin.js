@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { compare } from 'bcryptjs'
 import User from '../models/User'
 
-export default async (req, res) => {
+export default async function signIn(req, res) {
   const { username, password } = req.body
 
   try {
